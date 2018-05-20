@@ -1,4 +1,5 @@
 <?php
+    include "database/DBConexion.php";
 
     Class UsuarioControlador extends DBConexion {
 
@@ -45,16 +46,14 @@
                         $fila[$this->fields["hash"]]
                 );
               
-                return $usuario;
+                return 1;
 
                 }
                 else{
-                    return null;
+                    return 0;
                 }
                 
-            }    
-
-        }   
+        }       
 
         public function Check($hash){
 
@@ -119,7 +118,7 @@
             endwhile;
             return $lista;
         }
-    }
+    
     public function GetById($user){
              $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."HWERE ".$this->fields["user"]." = :username");
               $stmt->execute([
@@ -135,5 +134,6 @@
               
             return $usuario;
         }
+}
 
 ?>
