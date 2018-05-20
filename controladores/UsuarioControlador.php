@@ -119,12 +119,13 @@
             return $lista;
         }
     
-    public function GetById($user){
-             $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."HWERE ".$this->fields["user"]." = :username");
-              $stmt->execute([
-                'username' => $user
+    public function GetById($username){
+            $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."HWERE ".$this->fields["user"]." = :username");
+            $stmt->execute([
+                'username' => $username
             ]);
             $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($fila!=false){
                 $usuario = new UsuarioModelo();
                 $usuario->set(
                     $fila[$this->fields["user"]],
@@ -133,7 +134,8 @@
                 );
               
             return $usuario;
-        }
+            }else return null;
+    }
 }
 
 ?>

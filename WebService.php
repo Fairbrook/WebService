@@ -47,7 +47,13 @@
         array('return'=>'xsd:integer')
     );
 
-    
+    $server->register(
+        'RegistrarCuenta',
+        array('usuario'=>'tns:Usuario'),
+        array('return'=>'xsd:integer')
+    );
+
+
 
     /**
      * no tocar
