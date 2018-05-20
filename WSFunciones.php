@@ -19,4 +19,16 @@
         }else return 3;
     }
 
+    function SetHash($usuario){
+        $usuarioControlador = new UsuarioControlador();
+        $usuarioControlador->SetHash($usuario->username,$usuario->hash);
+    }
+
+    function CheckHash($usuario){
+        $usuarioControlador = new UsuarioControlador();
+        $bool = $usuarioControlador->Check($usuario->hash);
+        if($bool)return 1;
+        else return 0;
+    }
+
 ?>

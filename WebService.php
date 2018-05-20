@@ -59,6 +59,12 @@
         array('return'=>'xsd:null')
     );
 
+    $server->register(
+        'CheckHash',
+        array('usuario'=>'xsd:string'),
+        array('return'=>'xsd:integer')
+    );
+
     /**
      * no tocar
      */

@@ -37,8 +37,8 @@ Todos los métodos de WS reciben lo mismo: UsuarioModelo, ProductoModelo; al igu
 ## Lista de tareas
 - [X] Ingresar
 - [X] RegistrarCuenta
-- [ ] SetHash
-- [ ] CheckHash
+- [X] SetHash
+- [X] CheckHash
 - [ ] AgregarProducto
 - [ ] SelectProductoById
 - [ ] EliminarProducto
