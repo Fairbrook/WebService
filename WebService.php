@@ -42,10 +42,12 @@
      *      xsd = dato nativo 
      */
     $server->register(
-        'login',
+        'Ingresar',
         array('usuario'=>'tns:Usuario'),
         array('return'=>'xsd:integer')
     );
+
+    
 
     /**
      * no tocar
