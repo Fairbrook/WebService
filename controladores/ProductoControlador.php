@@ -76,7 +76,6 @@
         	  $stmt->execute([
                 'id' => $id
             ]);
-        	 $lista = array();
             $fila = $stmt->fetch(PDO::FETCH_ASSOC);
                 $producto = new ProductoModelo();
                 $producto->set(
