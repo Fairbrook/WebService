@@ -16,19 +16,21 @@
 
         public function Login($username,$password){
 
-        
+                $this->start();
                 $password = hash("sha256", $password);
                 
                 $stmt = $this->pdo->prepare(
                     "SELECT * FROM ".$this->tabla." ".
                     "WHERE ".$this->fields["user"]." = :username AND ".$this->fields["pwd"]." = :password"
                 );
-
+                
                 $stmt->execute([
                     'username' => $username,
                     'password' => $password 
                 ]);
-                    
+
+                $this->stop();
+                
                 if($stmt->rowCount() > 0){ 
 
                     $key = hash("sha256",(string)mt_rand(10, 1000));
@@ -45,7 +47,6 @@
                         $fila[$this->fields["pwd"]],
                         $fila[$this->fields["hash"]]
                 );
-              
                 return 1;
 
                 }
@@ -56,7 +57,7 @@
         }       
 
         public function Check($hash){
-
+                $this->start();
                 $key = $hash;
                 $stmt = $this->pdo->prepare(
                     "SELECT * FROM " . $this->tabla . " " .
@@ -66,6 +67,9 @@
                 $stmt->execute([
                     'key' => $key
                 ]);
+
+                $this->stop();
+
                 if($stmt->rowCount() == 1):
                     return false;
                 else:
@@ -77,7 +81,7 @@
         }
 
      public function Insert($username,$password){
-
+        $this->start();
                 $password = hash("sha256", $password);
                 $key = hash("sha256",(string)mt_rand(10, 1000));
 
@@ -99,14 +103,16 @@
                     'password' => $password,
                     'hash' => $key
                 ]);
+                $this->stop();
           
 
         }
     public function Select(){
+        $this->start();
             $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla);
             $stmt->execute();
 
-             $lista = array();
+            $lista = array();
             while($fila = $stmt->fetch(PDO::FETCH_ASSOC)):
                 $usuario = new UsuarioModelo();
                 $usuario->set(
@@ -116,15 +122,18 @@
                 );
                 $lista[] = $producto;
             endwhile;
+            $this->stop();
             return $lista;
         }
     
     public function GetById($username){
+        $this->start();
             $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."HWERE ".$this->fields["user"]." = :username");
             $stmt->execute([
                 'username' => $username
             ]);
             $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->stop();
             if($fila!=false){
                 $usuario = new UsuarioModelo();
                 $usuario->set(
@@ -135,6 +144,18 @@
               
             return $usuario;
             }else return null;
+    }
+
+    public function SetHash($username, $hash){
+        $this->start();
+        $stmt = $this->pdo->prepare("UPDATE {$this->tabla} SET
+        {$this->fields['hash']}= :hash
+        WHERE {$this->fields['user']}= :username");
+        $stmt->execute([
+            'hash'=>$hash,
+            'username'=>$username
+        ]);
+        $this->stop();
     }
 }
 

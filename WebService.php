@@ -53,7 +53,11 @@
         array('return'=>'xsd:integer')
     );
 
-
+    $server->register(
+        'SetHash',
+        array('usuario'=>'tns:Usuario'),
+        array('return'=>'xsd:null')
+    );
 
     /**
      * no tocar
