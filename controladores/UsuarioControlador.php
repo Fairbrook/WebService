@@ -120,7 +120,7 @@
                     $fila[$this->fields["pwd"]],
                     $fila[$this->fields["hash"]]
                 );
-                $lista[] = $producto;
+                $lista[] = $usuario;
             endwhile;
             $this->stop();
             return $lista;
@@ -128,7 +128,7 @@
     
     public function GetById($username){
         $this->start();
-            $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."HWERE ".$this->fields["user"]." = :username");
+            $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."WHERE ".$this->fields["user"]." = :username");
             $stmt->execute([
                 'username' => $username
             ]);

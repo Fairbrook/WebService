@@ -33,12 +33,26 @@
         )
     );
 
+    $server->wsdl->addComplexType(
+        'Producto',
+        'complexType',
+        'struct',
+        'all',
+        '',
+        array(
+            'id'=>array('name'=>'id','type'=>'xsd:int'),
+            'nombre'=>array('name'=>'nombre','type'=>'xsd:string'),
+            'existencia'=>array('name'=>'existencia','type'=>'xsd:int'),
+            'precio'=>array('name'=>'precio','type'=>'xsd:float')
+        )
+    );
+
     /**
      * Registrar todas las funciones una por una. Orden de los parametros:
      * nombre de la funcion. si tiene que ser el mismo
      * array con los parametros. array('nombre del parametro'=>'tipo de dato')
      * array con el valor devuelto. array('return'=>'tipo de dato')
-     *      tns = dato no nativo. creado en la sección de arriva
+     *      tns = dato no nativo. creado en la sección de arriba
      *      xsd = dato nativo 
      */
     $server->register(
@@ -63,6 +77,24 @@
         'CheckHash',
         array('usuario'=>'xsd:string'),
         array('return'=>'xsd:integer')
+    );
+
+    $server->register(
+        'AgregarProducto',
+        array('producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer')
+    );
+
+    $server->register(
+        'SelectProductoById'
+        array('id'=>'xsd:integer'),
+        array('return'=>'tns:Producto')
+    );
+
+    $server->register(
+        'EliminarProducto'
+        array('producto'=>'tns:Producto'),
+        array('return'=>'xsd:null')
     );
 
     /**

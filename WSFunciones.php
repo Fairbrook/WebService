@@ -31,4 +31,19 @@
         else return 0;
     }
 
+    function AgregarProducto($producto){
+        $productoControlador = new ProductoControlador();
+        return $productoControlador->Insert($producto->nombre, $producto->existencia, $producto->precio);
+    }
+
+    function SelectProductoById($id){
+        $productoControlador = new ProductoControlador();
+        return $productoControlador->GetById($id);
+    }
+
+    function EliminarProducto($producto){
+        $productoControlador = new ProductoControlador();
+        $productoControlador->Delete($producto->id);
+    }
+
 ?>

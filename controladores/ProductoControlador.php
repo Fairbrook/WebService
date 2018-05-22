@@ -36,7 +36,7 @@
             ]);
         }
         public function Insert($nombre,$existencia,$precio){
-        	 $stmt = $this->pdo->prepare(
+    	        $stmt = $this->pdo->prepare(
                     "INSERT INTO ".$this->tabla."
                     (
                         ".$this->fields["nombre"].",
@@ -49,11 +49,21 @@
                     )
                 ");
                 
-                $stmt->execute([
-                    'nombre' => $nombre,
-                    'exist' => $existencia,
-                    'precio' => $precio
-                ]);
+                try {
+                    $this->pdo->beginTransaction();
+                    $stmt->execute([
+                        'nombre' => $nombre,
+                        'exist' => $existencia,
+                        'precio' => $precio
+                    ]);
+                    $id = $this->pdo->lastInsertId();
+                    $this->pdo->commit();
+                    return $id;
+                } catch(PDOException $ex) {
+                    $this->pdo->rollback();
+                }
+
+                return 0;
         }
         public function Update($id,$nombre,$existencia,$precio){
         	$stmt = $this->pdo->prepare(
@@ -72,7 +82,7 @@
                         ]);
         }
         public function GetById($id){
-        	 $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."HWERE ".$this->fields["id"]." = :id");
+        	$stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."WHERE ".$this->fields["id"]." = :id");
         	  $stmt->execute([
                 'id' => $id
             ]);
