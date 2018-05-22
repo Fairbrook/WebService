@@ -39,7 +39,7 @@ Todos los métodos de WS reciben lo mismo: UsuarioModelo, ProductoModelo; al igu
 - [X] RegistrarCuenta
 - [X] SetHash
 - [X] CheckHash
-- [ ] AgregarProducto
-- [ ] SelectProductoById
-- [ ] EliminarProducto
-- [ ] _Funciones del loger_
+- [X] AgregarProducto
+- [X] SelectProductoById
+- [X] EliminarProducto
+- [ ] _Funciones del logger_
