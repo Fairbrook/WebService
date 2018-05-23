@@ -1,4 +1,5 @@
 <?php 
+
  Class ProductoControlador extends DBConexion{
  	 public $result;
         private $tabla = "productos";
@@ -9,7 +10,9 @@
             "precio" => "precio"
         );
      public function __construct(){}
+
         public function Select(){
+            $this->start();
         	 $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla);
         	  $stmt->execute();
 
@@ -27,6 +30,7 @@
             return $lista;
         } 
         public function Delete($id){
+            $this->start();
         	$stmt = $this->pdo->prepare(
                 "DELETE FROM ".$this->tabla." ".
                 "WHERE ".$this->fields["id"]." = :id"
@@ -36,6 +40,7 @@
             ]);
         }
         public function Insert($nombre,$existencia,$precio){
+            $this->start();
     	        $stmt = $this->pdo->prepare(
                     "INSERT INTO ".$this->tabla."
                     (
@@ -66,13 +71,14 @@
                 return 0;
         }
         public function Update($id,$nombre,$existencia,$precio){
+            $this->start();
         	$stmt = $this->pdo->prepare(
                             "UPDATE ".$this->tabla.
                             " SET ".
                             $this->fields["nombre"]." = :nombre, ".
                             $this->fields["exist"]." = :exist, ".
                             $this->fields["precio"]." = :precio ".
-                            "WHERE ".$this->fields["id"]." = :id"
+                            " WHERE ".$this->fields["id"]." = :id"
                         );
                         $stmt->execute([
                             'nombre' => $nombre,
@@ -82,7 +88,8 @@
                         ]);
         }
         public function GetById($id){
-        	$stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."WHERE ".$this->fields["id"]." = :id");
+            $this->start();
+        	$stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla." WHERE ".$this->fields["id"]." = :id");
         	  $stmt->execute([
                 'id' => $id
             ]);

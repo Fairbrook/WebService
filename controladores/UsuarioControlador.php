@@ -4,7 +4,7 @@
     Class UsuarioControlador extends DBConexion {
 
         public $result = 1;
-        private $tabla = "login";
+        private $tabla = "usuarios";
         public $key = '';
         private $fields = array(
             "user" => "username",
@@ -17,7 +17,6 @@
         public function Login($username,$password){
 
                 $this->start();
-                $password = hash("sha256", $password);
                 
                 $stmt = $this->pdo->prepare(
                     "SELECT * FROM ".$this->tabla." ".
@@ -29,7 +28,7 @@
                     'password' => $password 
                 ]);
 
-                $this->stop();
+                //$this->stop();
                 
                 if($stmt->rowCount() > 0){ 
 
@@ -39,14 +38,6 @@
                         "hash" => $key,
                         "username" => $username
                     ]);
-
-                    $fila = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $usuario = new UsuarioModelo();
-                    $usuario->set(
-                        $fila[$this->fields["user"]],
-                        $fila[$this->fields["pwd"]],
-                        $fila[$this->fields["hash"]]
-                );
                 return 1;
 
                 }
@@ -68,8 +59,6 @@
                     'key' => $key
                 ]);
 
-                $this->stop();
-
                 if($stmt->rowCount() == 1):
                     return false;
                 else:
@@ -82,7 +71,6 @@
 
      public function Insert($username,$password){
         $this->start();
-                $password = hash("sha256", $password);
                 $key = hash("sha256",(string)mt_rand(10, 1000));
 
                 $stmt = $this->pdo->prepare(
@@ -128,7 +116,7 @@
     
     public function GetById($username){
         $this->start();
-            $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla."WHERE ".$this->fields["user"]." = :username");
+            $stmt = $this->pdo->prepare("SELECT * FROM ".$this->tabla." WHERE ".$this->fields["user"]." = :username");
             $stmt->execute([
                 'username' => $username
             ]);
@@ -141,8 +129,8 @@
                     $fila[$this->fields["pwd"]],
                     $fila[$this->fields["hash"]]
                 );
-              
-            return $usuario;
+                
+                return $usuario;
             }else return null;
     }
 

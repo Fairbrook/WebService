@@ -1,12 +1,14 @@
 <?php
+
     /**
      * No tocar
      */
-    include "WSFunciones.php";
+    require "WSFunciones.php";
     $namespace = "http://localhost/WebService/WebService.php";
     $server = new soap_server();
-    $server->wsdl->schemaTargetNamespace = $namespace;
     $server->configureWSDL("AplicacionDistribuidos");
+    $server->wsdl->schemaTargetNamespace = $namespace;
+    
     
 
     /**
@@ -69,8 +71,7 @@
 
     $server->register(
         'SetHash',
-        array('usuario'=>'tns:Usuario'),
-        array('return'=>'xsd:null')
+        array('usuario'=>'tns:Usuario')
     );
 
     $server->register(
@@ -86,15 +87,50 @@
     );
 
     $server->register(
-        'SelectProductoById'
+        'SelectProductoById',
         array('id'=>'xsd:integer'),
         array('return'=>'tns:Producto')
     );
 
     $server->register(
-        'EliminarProducto'
-        array('producto'=>'tns:Producto'),
-        array('return'=>'xsd:null')
+        'EliminarProducto',
+        array('producto'=>'tns:Producto')
+    );
+
+    $server->register(
+        'ListaProducto',
+        array(),
+        array('return'=>'xsd:Array')
+    );
+
+    $server->register(
+        'ModificarProducto',
+        array('producto'=>'tns:Producto')
+    );
+
+    $server->register(
+        'LogEliminar',
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+    );
+
+    $server->register(
+        'LogIEliminar',
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+    );
+
+    $server->register(
+        'LogAgregar',
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+    );
+
+    $server->register(
+        'LogModificar',
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+    );
+
+    $server->register(
+        'LogIModificar',
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
     );
 
     /**
