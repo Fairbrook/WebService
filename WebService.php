@@ -3,11 +3,14 @@
     /**
      * No tocar
      */
+    include "nusoap/lib/nusoap.php";
     require "WSFunciones.php";
     $namespace = "http://localhost/WebService/WebService.php";
     $server = new soap_server();
-    $server->configureWSDL("AplicacionDistribuidos");
+    
+    $server->configureWSDL("WebService","urn:WebService");
     $server->wsdl->schemaTargetNamespace = $namespace;
+    
     
     
 
@@ -71,13 +74,24 @@
 
     $server->register(
         'SetHash',
-        array('usuario'=>'tns:Usuario')
+        array('usuario'=>'tns:Usuario'),
+        array('return'=>'xsd:int'),
+        'urn:WebService',
+        'urn:WebService#SetHash',
+        'rpc',
+        'encoded',
+        'checa el hash'
     );
 
     $server->register(
         'CheckHash',
         array('usuario'=>'xsd:string'),
-        array('return'=>'xsd:integer')
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#CheckHash',
+        'rpc',
+        'encoded',
+        'checa el hash'
     );
 
     $server->register(
@@ -89,12 +103,23 @@
     $server->register(
         'SelectProductoById',
         array('id'=>'xsd:integer'),
-        array('return'=>'tns:Producto')
+        array('return'=>'tns:Producto'),
+        'urn:WebService',
+        'urn:WebService#SelectProductoById',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     $server->register(
         'EliminarProducto',
-        array('producto'=>'tns:Producto')
+        array('producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#EliminarProducto',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     $server->register(
@@ -105,32 +130,68 @@
 
     $server->register(
         'ModificarProducto',
-        array('producto'=>'tns:Producto')
+        array('producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#ModificarProducto',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     $server->register(
         'LogEliminar',
-        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#LogEliminar',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     $server->register(
         'LogIEliminar',
-        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#LogRegistrar',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     $server->register(
         'LogAgregar',
-        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#LogAgregar',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     $server->register(
         'LogModificar',
-        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#LogModificar',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     $server->register(
         'LogIModificar',
-        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto')
+        array('usuario'=>'tns:Usuario','producto'=>'tns:Producto'),
+        array('return'=>'xsd:integer'),
+        'urn:WebService',
+        'urn:WebService#LogIModificar',
+        'rpc',
+        'encoded',
+        'registra un producto en el log'
     );
 
     /**

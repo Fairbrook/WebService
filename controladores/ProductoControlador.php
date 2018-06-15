@@ -25,7 +25,7 @@
                     $fila[$this->fields["exist"]],
                     $fila[$this->fields["precio"]]
                 );
-                $lista[] = $producto;
+                $lista[] =(array) $producto;
             endwhile;
             return $lista;
         } 

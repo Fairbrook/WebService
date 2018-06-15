@@ -1,16 +1,16 @@
 <?php 
     Class DBConexion {
-        private $host = "localhost";
+        private $host = "192.168.84.159";
         //private $host = "IP Address DB Server #1";
         private $base = "coco";
-        private $user = "root";
-        private $pwd = "";
+        private $user = "mew";
+        private $pwd = "123";
         private $charset = "utf8";
-        private $host2 = "localhost";
+        private $host2 = "192.168.84.16";
         //private $host2 = "IP Address DB Server #2";
         private $base2 = "coco";
-        private $user2 = "root";
-        private $pwd2 = "";
+        private $user2 = "emi";
+        private $pwd2 = "123";
         private $charset2 = "utf8";
         protected $pdo;
         public $status;

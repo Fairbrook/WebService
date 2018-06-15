@@ -1,5 +1,4 @@
 <?php
-    include "nusoap/lib/nusoap.php";
     include "modelos/ProductoModelo.php";
     include "modelos/UsuarioModelo.php";
     include "controladores/UsuarioControlador.php";
@@ -55,7 +54,7 @@
 
     function ListaProducto(){
         $productoControlador = new ProductoControlador();
-        return $productoControlador->Select();
+        return (array)$productoControlador->Select();
     }
 
     function ModificarProducto($producto){
